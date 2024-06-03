@@ -7,6 +7,9 @@ package main;
 import java.awt.Color;
 import javax.swing.JFrame;
 import autentikasi.Login;
+import com.mycompany.FantasyFittings.koneksiDB;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -68,6 +71,11 @@ public class Pelanggan extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        SearchInput = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        PelangganTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -494,7 +502,7 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addComponent(pn_btnPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pn_btnPengguna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(Logout)
                 .addGap(25, 25, 25))
         );
@@ -545,17 +553,91 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setPreferredSize(new java.awt.Dimension(0, 50));
+
+        SearchInput.setForeground(new java.awt.Color(153, 153, 153));
+        SearchInput.setText("Search...");
+        SearchInput.setMargin(new java.awt.Insets(2, 6, 2, 0));
+        SearchInput.setMaximumSize(new java.awt.Dimension(120, 30));
+        SearchInput.setName(""); // NOI18N
+        SearchInput.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                SearchInputFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                SearchInputFocusLost(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setLabel("Search");
+        jButton1.setMaximumSize(new java.awt.Dimension(75, 30));
+        jButton1.setMinimumSize(new java.awt.Dimension(75, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+
+        PelangganTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(PelangganTable);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 609, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout pn_bodyLayout = new javax.swing.GroupLayout(pn_body);
@@ -580,6 +662,34 @@ public class Pelanggan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void getData() {
+        DefaultTableModel model = new DefaultTableModel(new String[]{"#", "Name", "Email", "Alamat", "No. Telp", "Pinjaman Aktif"}, 0);
+        
+        try (Connection connection = koneksiDB.konfigurasi_koneksiDB()) {
+            String query = "SELECT * FROM pelangganfull";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+
+            int count = 1;
+            while (resultSet.next()) {
+                String name = resultSet.getString("nama");
+                String email = resultSet.getString("email");
+                String alamat = resultSet.getString("alamat");
+                String noTelp = resultSet.getString("nomorTelp");
+                String pinjamanAktif = resultSet.getString("pinjamanAktif");
+
+                model.addRow(new Object[]{count, name, email, alamat, noTelp, pinjamanAktif});
+                
+                count++;
+            }
+            System.out.print("Dapet");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        PelangganTable.setModel(model);
+    }
+    
     private void pn_btnDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_btnDashboardMouseEntered
         // TODO add your handling code here:
         pn_btnDashboard.setBackground(new Color(250, 250, 250));
@@ -658,6 +768,60 @@ public class Pelanggan extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LogoutMouseClicked
 
+    private void SearchInputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SearchInputFocusGained
+        // TODO add your handling code here:
+        if (SearchInput.getText().equals("Search...")) {
+            SearchInput.setText("");
+            SearchInput.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_SearchInputFocusGained
+
+    private void SearchInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_SearchInputFocusLost
+        // TODO add your handling code here:
+        if (SearchInput.getText().equals("")) {
+            SearchInput.setText("Search...");
+            SearchInput.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_SearchInputFocusLost
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String keyword = SearchInput.getText();
+
+        // Cek apakah input tidak kosong dan bukan "Search..."
+        if (!keyword.isEmpty() && !"Search...".equals(keyword)) {
+            DefaultTableModel model = new DefaultTableModel(new String[]{"#", "Name", "Email", "Alamat", "No. Telp", "Pinjaman Aktif"}, 0);
+
+            try (Connection connection = koneksiDB.konfigurasi_koneksiDB()) {
+                // Menggunakan PreparedStatement untuk menghindari SQL Injection
+                String query = "SELECT * FROM pelangganfull WHERE nama LIKE ? OR email LIKE ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                String likeKeyword = "%" + keyword + "%";
+                statement.setString(1, likeKeyword);
+                statement.setString(2, likeKeyword);
+                ResultSet resultSet = statement.executeQuery();
+
+                int count = 1;
+                while (resultSet.next()) {
+                    String name = resultSet.getString("nama");
+                    String email = resultSet.getString("email");
+                    String alamat = resultSet.getString("alamat");
+                    String noTelp = resultSet.getString("nomorTelp");
+                    String pinjamanAktif = resultSet.getString("pinjamanAktif");
+
+                    model.addRow(new Object[]{count, name, email, alamat, noTelp, pinjamanAktif});
+                    count++;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            PelangganTable.setModel(model);
+        } else {
+            getData();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -710,8 +874,11 @@ public class Pelanggan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Logout;
+    private javax.swing.JTable PelangganTable;
+    private javax.swing.JTextField SearchInput;
     private javax.swing.JLabel dash_user;
     private javax.swing.JLabel dash_username;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -729,7 +896,9 @@ public class Pelanggan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pn_body;
     private javax.swing.JPanel pn_btnDashboard;
     private javax.swing.JPanel pn_btnOutfit;
