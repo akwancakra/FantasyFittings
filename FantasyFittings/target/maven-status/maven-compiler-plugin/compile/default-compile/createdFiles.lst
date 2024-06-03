@@ -73,6 +73,7 @@ autentikasi\LupaPW$3.class
 main\Dashboard$8.class
 main\Pembayaran$5.class
 main\Penyewaan$3.class
+main\Pelanggan$9.class
 main\Pelanggan$2.class
 com\mycompany\FantasyFittings\koneksiDB.class
 main\Pengguna$1.class
@@ -83,6 +84,7 @@ main\Dashboard$7.class
 main\Outfit$4.class
 main\Pembayaran.class
 main\Pelanggan$1.class
+main\Pelanggan$10.class
 main\Pembayaran$15.class
 main\Pengguna$8.class
 autentikasi\Register$2.class
