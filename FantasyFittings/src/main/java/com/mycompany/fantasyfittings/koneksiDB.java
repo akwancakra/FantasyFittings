@@ -31,7 +31,7 @@ public class koneksiDB {
             String url_host = "jdbc:mysql://localhost/fantasyfittings";
             String nama_user = "root";
             String password_db = "";
-            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             koneksi = DriverManager.getConnection(url_host, nama_user, password_db);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Database gagal koneksi: " + e.getMessage());
