@@ -33,11 +33,12 @@ public class koneksiDB {
             String password_db = "";
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
             koneksi = DriverManager.getConnection(url_host, nama_user, password_db);
+            System.out.println("Koneksi berhasil");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Database gagal koneksi: " + e.getMessage());
         }
         return koneksi;
-    }   
+    }
     
     public static void main(String[] args) throws SQLException {
         Connection mengkoneksi = koneksiDB.konfigurasi_koneksiDB();

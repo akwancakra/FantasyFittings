@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import autentikasi.Login;
 import com.mycompany.FantasyFittings.koneksiDB;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +23,7 @@ public class Pelanggan extends javax.swing.JFrame {
      */
     public Pelanggan() {
         initComponents();
+        getData();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -73,9 +75,25 @@ public class Pelanggan extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         SearchInput = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         PelangganTable = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        detTextNama = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        detNama = new javax.swing.JTextField();
+        detNomor = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        detEmail = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        detAlamat = new javax.swing.JTextArea();
+        jPanel6 = new javax.swing.JPanel();
+        editButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -502,7 +520,7 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addComponent(pn_btnPembayaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pn_btnPengguna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addComponent(Logout)
                 .addGap(25, 25, 25))
         );
@@ -540,7 +558,7 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addGap(741, 741, 741))
         );
         jPanel4Layout.setVerticalGroup(
@@ -570,14 +588,14 @@ public class Pelanggan extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setLabel("Search");
-        jButton1.setMaximumSize(new java.awt.Dimension(75, 30));
-        jButton1.setMinimumSize(new java.awt.Dimension(75, 30));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(0, 0, 0));
+        searchButton.setForeground(new java.awt.Color(255, 255, 255));
+        searchButton.setLabel("Search");
+        searchButton.setMaximumSize(new java.awt.Dimension(75, 30));
+        searchButton.setMinimumSize(new java.awt.Dimension(75, 30));
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -589,7 +607,7 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -598,7 +616,7 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -615,7 +633,195 @@ public class Pelanggan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        PelangganTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PelangganTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(PelangganTable);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+
+        detTextNama.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        detTextNama.setText("Nama");
+
+        jLabel14.setText("Nama");
+
+        detNama.setText("Nama...");
+        detNama.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                detNamaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                detNamaFocusLost(evt);
+            }
+        });
+
+        detNomor.setText("No Telp...");
+        detNomor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                detNomorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                detNomorFocusLost(evt);
+            }
+        });
+
+        jLabel15.setText("Nomor Telepon");
+
+        jLabel16.setText("Alamat");
+
+        detEmail.setText("E-mail...");
+        detEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                detEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                detEmailFocusLost(evt);
+            }
+        });
+
+        jLabel17.setText("Email");
+
+        detAlamat.setColumns(20);
+        detAlamat.setRows(5);
+        detAlamat.setText("Alamat...");
+        detAlamat.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                detAlamatFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                detAlamatFocusLost(evt);
+            }
+        });
+        jScrollPane1.setViewportView(detAlamat);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        editButton.setBackground(new java.awt.Color(38, 38, 38));
+        editButton.setForeground(new java.awt.Color(255, 255, 255));
+        editButton.setText("Ubah");
+        editButton.setMaximumSize(new java.awt.Dimension(76, 33));
+        editButton.setMinimumSize(new java.awt.Dimension(76, 33));
+        editButton.setPreferredSize(new java.awt.Dimension(76, 33));
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        addButton.setBackground(new java.awt.Color(38, 38, 38));
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setText("Tambah");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        clearButton.setBackground(new java.awt.Color(38, 38, 38));
+        clearButton.setForeground(new java.awt.Color(255, 255, 255));
+        clearButton.setText("Bersihkan");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        deleteButton.setBackground(new java.awt.Color(38, 38, 38));
+        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButton.setText("Hapus");
+        deleteButton.setMaximumSize(new java.awt.Dimension(76, 33));
+        deleteButton.setMinimumSize(new java.awt.Dimension(76, 33));
+        deleteButton.setPreferredSize(new java.awt.Dimension(76, 33));
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(detTextNama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(detNama, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15)
+                            .addComponent(detNomor, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel17)
+                            .addComponent(detEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                            .addComponent(jLabel16)
+                            .addComponent(jScrollPane1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(detTextNama)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(detNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(detEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(detNomor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -625,8 +831,9 @@ public class Pelanggan extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -636,8 +843,10 @@ public class Pelanggan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pn_bodyLayout = new javax.swing.GroupLayout(pn_body);
@@ -663,8 +872,8 @@ public class Pelanggan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void getData() {
-        DefaultTableModel model = new DefaultTableModel(new String[]{"#", "Name", "Email", "Alamat", "No. Telp", "Pinjaman Aktif"}, 0);
-        
+        DefaultTableModel model = new DefaultTableModel(new String[]{"#", "ID", "Name", "Email", "Alamat", "No. Telp", "Pinjaman Aktif"}, 0);
+
         try (Connection connection = koneksiDB.konfigurasi_koneksiDB()) {
             String query = "SELECT * FROM pelangganfull";
             Statement statement = connection.createStatement();
@@ -672,22 +881,68 @@ public class Pelanggan extends javax.swing.JFrame {
 
             int count = 1;
             while (resultSet.next()) {
+                int id = resultSet.getInt("id");
                 String name = resultSet.getString("nama");
                 String email = resultSet.getString("email");
                 String alamat = resultSet.getString("alamat");
                 String noTelp = resultSet.getString("nomorTelp");
                 String pinjamanAktif = resultSet.getString("pinjamanAktif");
 
-                model.addRow(new Object[]{count, name, email, alamat, noTelp, pinjamanAktif});
-                
+                model.addRow(new Object[]{count, id, name, email, alamat, noTelp, pinjamanAktif});
                 count++;
             }
-            System.out.print("Dapet");
+            System.out.println("Data retrieval complete"); // Debug log
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         PelangganTable.setModel(model);
+    }
+    
+    public boolean checkReserveEmail(String email, int id) {
+        String query = "SELECT id, COUNT(*) AS jumlah FROM pelanggan WHERE email = ?";
+        boolean emailExists = false;
+
+        try (Connection connection = koneksiDB.konfigurasi_koneksiDB();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Cek apakah ada hasil
+            if (!resultSet.next()) {
+                return false; // Email tidak ditemukan, jadi aman
+            }
+
+            // Ulangi untuk semua hasil
+            do {
+                int existingId = resultSet.getInt("id");
+                if (existingId != 0 && (id == -1 || existingId != id)) {
+                    emailExists = true;
+                    break;
+                }
+            } while (resultSet.next());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return emailExists; // Mengembalikan true jika email sudah terpakai oleh pelanggan lain
+    }
+    
+    public void setInputsData(int id, String nama, String noTelp, String email, String alamat) {
+        detTextNama.setText(nama + " - " + id);
+        detNama.setText(nama);
+        detEmail.setText(email);        
+        detNomor.setText(noTelp);
+        detAlamat.setText(alamat);
+    }
+    
+    public void clearInputs() {
+        detTextNama.setText("Nama - ID");
+        detNama.setText("Nama...");
+        detEmail.setText("E-mail...");
+        detNomor.setText("No Telp...");
+        detAlamat.setText("Alamat...");
     }
     
     private void pn_btnDashboardMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pn_btnDashboardMouseEntered
@@ -784,7 +1039,7 @@ public class Pelanggan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_SearchInputFocusLost
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
         String keyword = SearchInput.getText();
 
@@ -820,7 +1075,266 @@ public class Pelanggan extends javax.swing.JFrame {
         } else {
             getData();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        clearInputs();
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin menambahkan data ini?", "Konfirmasi Penambahan", JOptionPane.YES_NO_OPTION);
+        
+        if (response == JOptionPane.YES_OPTION) {
+            try {
+                // Ambil data yang dimasukkan oleh pengguna
+
+                String nama = this.detNama.getText();
+                String email = this.detEmail.getText();
+                String alamat = this.detAlamat.getText();
+                String noTelp = this.detNomor.getText();
+                
+                if (nama.equals("Nama...") || email.equals("E-mail...") || noTelp.equals("No Telp...") || alamat.equals("Alamat...")) {
+                    JOptionPane.showMessageDialog(null, "Isi data dengan sesuai terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if (checkReserveEmail(email, -1)) {
+                    JOptionPane.showMessageDialog(null, "Email sudah terpakai!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Buat koneksi ke database
+                Connection koneksi = koneksiDB.konfigurasi_koneksiDB();
+
+                // Buat query untuk memasukkan data ke dalam tabel pelangggan
+                String query = "INSERT INTO pelanggan (nama, email, nomorTelp, alamat) VALUES (?, ?, ?, ?)";
+                PreparedStatement statement = koneksi.prepareStatement(query);
+
+                // Set nilai parameter pada statement
+                statement.setString(1, nama);
+                statement.setString(2, email);
+                statement.setString(3, noTelp);
+                statement.setString(4, alamat);
+
+                // Eksekusi perintah SQL untuk memasukkan data ke dalam tabel
+                int rowsInserted = statement.executeUpdate();
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(null, "Berhasil menambahkan pelanggan baru!.");
+
+                    // Perbarui data
+                    getData();
+                }
+            } catch (SQLException e) {
+                System.out.println("Terjadi kesalahan saat memasukkan data ke dalam tabel pelanggan: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat memasukkan data ke dalam tabel pelanggan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Penambahan dibatalkan
+            JOptionPane.showMessageDialog(null, "Data batal ditambahkan!");
+            return;
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin mengubah ini?", "Konfirmasi Penambahan", JOptionPane.YES_NO_OPTION);
+        
+        if (response == JOptionPane.YES_OPTION) {
+            try {
+                // GET DATA DULU
+                String[] parts = this.detTextNama.getText().split(" - ");
+                int id;
+                try {
+                    id = Integer.parseInt(parts[parts.length - 1].trim());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "ID tidak valid. Pastikan sudah memilih data.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                System.out.println(id);
+
+                String nama = this.detNama.getText();
+                String email = this.detEmail.getText();
+                String alamat = this.detAlamat.getText();
+                String noTelp = this.detNomor.getText();
+                
+                if (nama.equals("Nama...") || email.equals("E-mail...") || noTelp.equals("No Telp...") || alamat.equals("Alamat...")) {
+                    JOptionPane.showMessageDialog(null, "Isi data dengan sesuai terlebih dahulu!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if (checkReserveEmail(email, id)) {
+                    JOptionPane.showMessageDialog(null, "Email sudah terpakai!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Buat koneksi ke database
+                Connection koneksi = koneksiDB.konfigurasi_koneksiDB();
+                
+                // Cek apakah data pelanggan dengan ID tersebut ada
+                String checkQuery = "SELECT COUNT(*) FROM pelanggan WHERE id = ?";
+                PreparedStatement checkStatement = koneksi.prepareStatement(checkQuery);
+                checkStatement.setInt(1, id);
+                ResultSet checkResult = checkStatement.executeQuery();
+                if (checkResult.next()) {
+                    int count = checkResult.getInt(1);
+                    if (count == 0) {
+                        JOptionPane.showMessageDialog(null, "Data pelanggan tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+
+                // Buat query untuk memasukkan data ke dalam tabel pelangggan
+                String query = "UPDATE pelanggan SET nama = ?, email = ?, nomorTelp = ?, alamat = ? WHERE id = ?";
+                PreparedStatement statement = koneksi.prepareStatement(query);
+
+                // Set nilai parameter pada statement
+                statement.setString(1, nama);
+                statement.setString(2, email);
+                statement.setString(3, noTelp);
+                statement.setString(4, alamat);
+                statement.setInt(5, id);
+
+                // Eksekusi perintah SQL untuk memasukkan data ke dalam tabel
+                int rowsInserted = statement.executeUpdate();
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(null, "Berhasil mengubah data pelanggan!.");
+
+                    // Perbarui data
+                    getData();
+                }
+            } catch (SQLException e) {
+                System.out.println("Terjadi kesalahan saat mengubah data ke dalam tabel pelanggan: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat mengubah data ke dalam tabel pelanggan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Penambahan dibatalkan
+            JOptionPane.showMessageDialog(null, "Data batal diubah!");
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void detNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detNamaFocusGained
+        if (detNama.getText().equals("Nama...")) {
+            detNama.setText("");
+            detNama.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_detNamaFocusGained
+
+    private void detNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detNamaFocusLost
+        if (detNama.getText().equals("")) {
+            detNama.setText("Nama...");
+            detNama.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_detNamaFocusLost
+
+    private void detEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detEmailFocusGained
+        if (detEmail.getText().equals("E-mail...")) {
+            detEmail.setText("");
+            detEmail.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_detEmailFocusGained
+
+    private void detEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detEmailFocusLost
+        if (detEmail.getText().equals("")) {
+            detEmail.setText("E-mail...");
+            detEmail.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_detEmailFocusLost
+
+    private void detNomorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detNomorFocusGained
+        if (detNomor.getText().equals("No Telp...")) {
+            detNomor.setText("");
+            detNomor.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_detNomorFocusGained
+
+    private void detNomorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detNomorFocusLost
+        if (detNomor.getText().equals("")) {
+            detNomor.setText("No Telp...");
+            detNomor.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_detNomorFocusLost
+
+    private void detAlamatFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detAlamatFocusGained
+        if (detAlamat.getText().equals("Alamat...")) {
+            detAlamat.setText("");
+            detAlamat.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_detAlamatFocusGained
+
+    private void detAlamatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_detAlamatFocusLost
+        if (detAlamat.getText().equals("")) {
+            detAlamat.setText("Alamat...");
+            detAlamat.setForeground(new Color(0,0,0));
+        }
+    }//GEN-LAST:event_detAlamatFocusLost
+
+    private void PelangganTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PelangganTableMouseClicked
+        int baris = PelangganTable.rowAtPoint(evt.getPoint());
+        
+        int id = Integer.parseInt(PelangganTable.getValueAt(baris, 1).toString());
+        String nama = PelangganTable.getValueAt(baris, 2).toString();
+        String email = PelangganTable.getValueAt(baris, 3).toString();
+        String alamat = PelangganTable.getValueAt(baris, 4).toString();
+        String noTelp = PelangganTable.getValueAt(baris, 5).toString();
+        
+        setInputsData(id, nama, noTelp, email, alamat);
+    }//GEN-LAST:event_PelangganTableMouseClicked
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        int response = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin mengubah ini?", "Konfirmasi Penambahan", JOptionPane.YES_NO_OPTION);
+        
+        if (response == JOptionPane.YES_OPTION) {
+            try {
+                // GET DATA DULU
+                String[] parts = this.detTextNama.getText().split(" - ");
+                int id;
+                try {
+                    id = Integer.parseInt(parts[parts.length - 1].trim());
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "ID tidak valid. Pastikan format teks benar.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // KONEK DULU
+                Connection koneksi = koneksiDB.konfigurasi_koneksiDB();
+                
+                // Cek apakah data pelanggan dengan ID tersebut ada
+                String checkQuery = "SELECT COUNT(*) FROM pelanggan WHERE id = ?";
+                PreparedStatement checkStatement = koneksi.prepareStatement(checkQuery);
+                checkStatement.setInt(1, id);
+                ResultSet checkResult = checkStatement.executeQuery();
+                if (checkResult.next()) {
+                    int count = checkResult.getInt(1);
+                    if (count == 0) {
+                        JOptionPane.showMessageDialog(null, "Data pelanggan tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+
+                // SIAPIN QUERYNYA
+                String query = "DELETE FROM pelanggan WHERE id = ?";
+                PreparedStatement statement = koneksi.prepareStatement(query);
+
+                // Set nilai parameter pada statement
+                statement.setInt(1, id);
+
+                // Eksekusi perintah SQL untuk memasukkan data ke dalam tabel
+                int rowsInserted = statement.executeUpdate();
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(null, "Berhasil menghapus data pelanggan!.");
+
+                    // Perbarui data
+                    getData();
+                }
+            } catch (SQLException e) {
+                System.out.println("Terjadi kesalahan saat menghapus data ke dalam tabel pelanggan: " + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat menghapus data ke dalam tabel pelanggan: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            // Penambahan dibatalkan
+            JOptionPane.showMessageDialog(null, "Data batal dihapus!");
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -876,14 +1390,26 @@ public class Pelanggan extends javax.swing.JFrame {
     private javax.swing.JLabel Logout;
     private javax.swing.JTable PelangganTable;
     private javax.swing.JTextField SearchInput;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton clearButton;
     private javax.swing.JLabel dash_user;
     private javax.swing.JLabel dash_username;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JTextArea detAlamat;
+    private javax.swing.JTextField detEmail;
+    private javax.swing.JTextField detNama;
+    private javax.swing.JTextField detNomor;
+    private javax.swing.JLabel detTextNama;
+    private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
@@ -898,6 +1424,9 @@ public class Pelanggan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel pn_body;
     private javax.swing.JPanel pn_btnDashboard;
@@ -915,5 +1444,6 @@ public class Pelanggan extends javax.swing.JFrame {
     private javax.swing.JPanel pn_logo;
     private javax.swing.JPanel pn_sidebar;
     private javax.swing.JPanel pn_user;
+    private javax.swing.JButton searchButton;
     // End of variables declaration//GEN-END:variables
 }
